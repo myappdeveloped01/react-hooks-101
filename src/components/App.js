@@ -1,5 +1,6 @@
 import React, { useReducer, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Event from './Event';
 import reducer from '../reducers';
 
 const App = () => {
@@ -45,7 +46,7 @@ const App = () => {
 						className="form-control"
 						id="formEventBody"
 						value={body}
-						onChange={e => setBody(e.target.e)}
+						onChange={e => setBody(e.target.value)}
 					/>
 				</div>
 				<button className="btn btn-primary" onClick={addEvent}>
@@ -64,7 +65,13 @@ const App = () => {
 						<th></th>
 					</tr>
 				</thead>
-				<tbody></tbody>
+				<tbody>
+					{/* mapによって、配列から要素を１つずつ取り出せる */}
+					{/* 第２引数のindexをタグのkey属性に埋め込むことで、要素を参照でき、削除等で用いることができる */}
+					{state.map((event, index) => {
+						return <Event key={index} envent={event} dispatch={dispatch} />;
+					})}
+				</tbody>
 			</table>
 		</div>
 	);
