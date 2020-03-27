@@ -7,9 +7,10 @@ import reducer from '../reducers';
 
 const App = () => {
 	// 引数のreducerは、reducers/index.jsにあるexport defaultのeventsコンポーネントになる
-const initialState =	{
-		events: []
-	}
+	const initialState = {
+		events: [],
+		operationLogs: [],
+	};
 	const [state, dispatch] = useReducer(reducer, initialState);
 
 	return (
