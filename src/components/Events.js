@@ -19,7 +19,7 @@ const Events = () => {
 				<tbody>
 					{/* mapによって、配列から要素を１つずつ取り出せる */}
 					{/* 第２引数のindexをタグのkey属性に埋め込むことで、要素を参照でき、削除等で用いることができる */}
-					{state.map((event, index) => {
+					{state.events.map((event, index) => {
 						return <Event key={index} event={event} />;
 					})}
 				</tbody>
