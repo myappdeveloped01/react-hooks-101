@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CREATE_EVENT, DELETE_ALL_EVENTS } from '../actions';
 
 const EventForm = ({ state, dispatch }) => {
 	// 引数のreducerは、reducers/index.jsにあるexport defaultのeventsコンポーネントになる
@@ -12,7 +13,7 @@ const EventForm = ({ state, dispatch }) => {
 		e.preventDefault();
 		// reducers/index.jsに値を渡す
 		dispatch({
-			type: 'CREATE_EVENT',
+			type: CREATE_EVENT,
 			title,
 			body,
 		});
@@ -27,7 +28,7 @@ const EventForm = ({ state, dispatch }) => {
 		// YESとNOが選択できるアラームを表示する
 		// YESを選択すると、trueを返す。（NOはfalse）
 		const result = window.confirm('全てのイベントを本当に削除してもよいですか？');
-		if (result) dispatch({ type: 'DELETE_ALL_EVENTS' });
+		if (result) dispatch({ type: DELETE_ALL_EVENTS });
 	};
 
 	const unCreatable = title === '' || body === '';
