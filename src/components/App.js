@@ -23,6 +23,18 @@ const App = () => {
 		setTitle('');
 		setBody('');
 	};
+
+	const deleteAllEvents = e => {
+		// 画面全体のリロードを防ぐ
+		e.preventDefault();
+		// YESとNOが選択できるアラームを表示する
+		// YESを選択すると、trueを返す。（NOはfalse）
+		const result = window.confirm('全てのイベントを本当に削除してもよいですか？');
+		if (result) dispatch({ type: 'DELETE_ALL_EVENTS' });
+	};
+
+	const unCreatable = title === '' || body === '';
+
 	return (
 		<div className="container-fluid">
 			<h4>イベント作成フォーム</h4>
@@ -49,10 +61,12 @@ const App = () => {
 						onChange={e => setBody(e.target.value)}
 					/>
 				</div>
-				<button className="btn btn-primary" onClick={addEvent}>
+				<button className="btn btn-primary" onClick={addEvent} disabled={unCreatable}>
 					イベントを作成する
 				</button>
-				<button className="btn btn-danger">全てのイベントを削除する</button>
+				<button className="btn btn-danger" onClick={deleteAllEvents} disabled={state.length === 0}>
+					全てのイベントを削除する
+				</button>
 			</form>
 
 			<h4>イベント一覧</h4>
@@ -69,7 +83,7 @@ const App = () => {
 					{/* mapによって、配列から要素を１つずつ取り出せる */}
 					{/* 第２引数のindexをタグのkey属性に埋め込むことで、要素を参照でき、削除等で用いることができる */}
 					{state.map((event, index) => {
-						return <Event key={index} envent={event} dispatch={dispatch} />;
+						return <Event key={index} event={event} dispatch={dispatch} />;
 					})}
 				</tbody>
 			</table>

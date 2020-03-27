@@ -2,7 +2,10 @@ import React from 'react';
 
 const Event = ({ event, dispatch }) => {
 	const handleClickDeleteButton = () => {
-		dispatch({ type: 'DELETE_EVENT', id: event.id });
+		// YESとNOが選択できるアラームを表示する
+		// YESを選択すると、trueを返す。（NOはfalse）
+		const result = window.confirm(`イベント(id=${event.id})を本当に削除してもよいですか？`);
+		if (result) dispatch({ type: 'DELETE_EVENT', id: event.id });
 	};
 	return (
 		<tr>
